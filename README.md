@@ -1,13 +1,5 @@
-Required commands
+docker-compose up --build
 
-docker run --name hw10 -p 5432:5432 -e POSTGRES_PASSWORD=admin -d postgres
+docker-compose run --rm app alembic revision --autogenerate -m "migration_name"
 
-docker exec -it hw10 psql -U postgres -c "CREATE DATABASE hw10;"
-
-alembic init alembic
-
-alembic revision -m "Movie model" --autogenerate
-
-alembic upgrade head
-
-fastapi dev main.py
+docker-compose run --rm app alembic upgrade head
